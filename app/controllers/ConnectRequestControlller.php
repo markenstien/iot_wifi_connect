@@ -43,7 +43,7 @@
 					],
 				]);
 
-				$href = 'http://localhost/api_development/api_iot_wifi_connect/api/v1/connect-request/approve?token='. $this->connectRequestModel->getRetval('token');
+				$href = 'https://briskapi.online/api/v1/connect-request/approve?token='. $this->connectRequestModel->getRetval('token');
 				mailer()
 				->create([
 					'subject' => 'Leaf Mail Test',
