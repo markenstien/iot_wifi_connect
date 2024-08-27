@@ -10,6 +10,7 @@
 
     class ConnectRequestControlller extends Controller {
 		private $connectRequestModel;
+		const DEFAULT_WIFI_PASSWORD = 'thwise101';
     	public function __construct() {
     		parent::__construct();
     		$this->connectRequestModel = new ConnectRequestModel();
@@ -87,7 +88,10 @@
 			$token = request()->params('token');
 			if(!empty($token)) {
 				$resp = $this->connectRequestModel->getByToken($token);
-				echo $this->apiResponse([$resp]);
+				echo $this->apiResponse([
+					'token_data' => $resp,
+					'wifi_password' => self::DEFAULT_WIFI_PASSWORD
+				]);
 			} else {
 				echo 'token not found';
 			}
