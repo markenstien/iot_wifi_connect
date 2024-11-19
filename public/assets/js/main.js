@@ -111,8 +111,9 @@ async function login() {
         publicKey : {
             // challenge : new Uint8Array([0,1,2,3,4,5,6]),
             challenge : new Uint8Array(challengeString.split(',')),
-            allowCredentials : [
-            ],
+            allowCredentials : {
+                type : 'public-key', id : rawId
+            },
             user : {
                 // id: new Uint8Array(16),
                 id: new Uint8Array(initdata['user_id']),

@@ -50,7 +50,8 @@ async function signup() {
           console.log([
             'webauthn - saved',
             content
-          ]);
+        ]);
+        
     }
 
     rawId = data.rawId;
