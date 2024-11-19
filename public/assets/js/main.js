@@ -33,9 +33,7 @@ $(document).ready(function(){
             const login_auth = await login();
             if(login_auth) {
                 let decline = await fetch(SERVER_URL + '/api/v1/connect-request/decline?token=' + targetToken);
-                console.log(
-                    decline
-                );
+                showModalText('Connection Request Declined');
                 getRequests();
             }
         }
@@ -43,9 +41,7 @@ $(document).ready(function(){
             const login_auth = await login();
             if(login_auth) {
                 let approve = await fetch(SERVER_URL + '/api/v1/connect-request/approve?token=' + targetToken);
-                console.log(
-                    approve
-                );
+                showModalText('Connection Request Approved');
                 getRequests();
             }
         }
@@ -94,7 +90,7 @@ async function signup() {
     console.log(data);
     console.log(challengeString.split(','));
 
-    showModalText(`Successfully registered`);
+    showModalText(`Finger prin recognized`);
 }
 
 async function login() {
@@ -117,7 +113,6 @@ async function login() {
                 }
             ],
             user : {
-                // id: new Uint8Array(16),
                 id: new Uint8Array(initdata['user_id']),
                 name: initdata['user_name'],
                 displayName : initdata['user_name']
