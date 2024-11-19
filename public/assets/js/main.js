@@ -11,7 +11,7 @@ const request_total = document.querySelector('#request_total');
 
 // approveButton.addEventListener("click", signup)
 // declineButton.addEventListener("click", login)
-// closeButton.addEventListener("click", () => modal.close())
+closeButton.addEventListener("click", () => modal.close())
 
 // const SERVER_URL = "http://localhost/api_development/api_iot_wifi_connect";
 const SERVER_URL = "https://briskapi.online";
@@ -107,11 +107,12 @@ async function login() {
 
     const json = await response.json();
     const webauthn = json['data']['authn'];
-    const webauthnData = JSON.parse(webauthn);
     const data = await navigator.credentials.get({
         publicKey : {
             // challenge : new Uint8Array([0,1,2,3,4,5,6]),
             challenge : new Uint8Array(challengeString.split(',')),
+            allowCredentials : [
+            ],
             user : {
                 // id: new Uint8Array(16),
                 id: new Uint8Array(initdata['user_id']),

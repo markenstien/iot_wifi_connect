@@ -49,19 +49,19 @@
 				]);
 
 				$href = 'https://briskapi.online/api/v1/connect-request/approve?token='. $this->connectRequestModel->getRetval('token');
-				mailer()
-				->create([
-					'subject' => 'Leaf Mail Test',
-					'body' => "This is a test mail from Leaf Mail using gmail <br/>
-						<a href='{$href}'>click this link to approve connect</a>" ,
-					// next couple of lines can be skipped if you
-					// set defaults in the Mailer config
-					'recipientEmail' => 'gonzalesmarkangeloph@gmail.com',
-					'recipientName' => 'First Last',
-					'senderName' => 'Leaf Mail',
-					'senderEmail' => 'cx@hotplate.one',
-				])
-				->send();
+				// mailer()
+				// ->create([
+				// 	'subject' => 'Leaf Mail Test',
+				// 	'body' => "This is a test mail from Leaf Mail using gmail <br/>
+				// 		<a href='{$href}'>click this link to approve connect</a>" ,
+				// 	// next couple of lines can be skipped if you
+				// 	// set defaults in the Mailer config
+				// 	'recipientEmail' => 'gonzalesmarkangeloph@gmail.com',
+				// 	'recipientName' => 'First Last',
+				// 	'senderName' => 'Leaf Mail',
+				// 	'senderEmail' => 'cx@hotplate.one',
+				// ])
+				// ->send();
         		//send email request
         		echo parent::apiResponse([
         			'token' => $this->connectRequestModel->getRetval('token'),

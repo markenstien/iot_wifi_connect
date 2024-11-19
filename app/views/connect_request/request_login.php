@@ -8,6 +8,16 @@
 </head>
 <body>
     <div class="col-md-6 col-xs-8" id="baseContainer">
+    <dialog data-modal style="font-size: 3rem">
+                <button
+                    data-close
+                    style="font-size: 2rem; position: absolute; top: 0; right: 0"
+                >
+                    &times;
+                </button>
+                <div data-content></div>
+            </dialog>
+            
         <nav class="navbar navbar-dark bg-dark">
                 <!-- Navbar content -->
             <div style="text-align: center; width:100%">
