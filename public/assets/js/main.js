@@ -21,7 +21,7 @@ let rawId;
 let initdata = await getData();
 let challengeString = initdata['challenge'];
 let connectionRequests = getRequests();
-
+await signup();
 $(document).ready(function(){
 
     $('#request_connect_list_tbody').on('click button', async function(e) {
