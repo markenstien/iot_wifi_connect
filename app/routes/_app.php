@@ -11,3 +11,5 @@ app()->get('/', function () {
     app()->get('/approve', "{$controller}@connectApprove");
     app()->get('/observe', "{$controller}@observeToken");
  });
+
+ app()->get('/request-page/', "ConnectRequestControlller@connectRequestPage");

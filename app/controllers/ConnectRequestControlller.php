@@ -15,6 +15,10 @@
     		parent::__construct();
     		$this->connectRequestModel = new ConnectRequestModel();
     	}
+
+		public function connectRequestPage() {
+			render('connect_request/index');
+		}
         /**
          *API CONNECT REQUEST
          * returns token*/
