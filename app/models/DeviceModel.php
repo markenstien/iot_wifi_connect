@@ -12,6 +12,6 @@
         }
 
         public function getPassword($id) {
-            return parent::where('id', $id)->first();
+            return parent::where('id', $id)->first()['wifi_password'];
         }
     }
