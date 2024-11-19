@@ -24,20 +24,26 @@
         <div class="col-md-6 col-xs-8" id="baseContainer">
             <div class="container-fluid">
                 <div class="mt-3"></div>
-                    <h4 class="text-center">Request Connections</h4>
+                    <h4 class="text-center">Update Wifi Password</h4>
                 <hr>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                            <th style="width: 20%;">Name</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </thead>
-                        
-                        <tbody id="request_connect_list_tbody">
-
-                        </tbody>
-                    </table>
+                    <?php if(!empty($message)) :?>
+                        <p class="text-success"><?php echo $message?></p>
+                    <?php endif?>
+                    <form method="post">
+                        <div style="display: flex;">
+                            <div style="flex : 2; margin-right : 10px">
+                                <input type="text" class="form-control" id="new_password" name="new_password">
+                            </div>
+                            <div style="flex : 1">
+                                <input type="submit" class="btn btn-sm btn-success" value="Update">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="mt-2 mb-2" data-password="<?php echo $password?>" id="showPassword">show password</div>
+                            <span id="currentWifiPassword"></span>
+                        </div>
+                    </form>
 
                     <h3 id="request_total" style="display: none;">Request Total : </h3>
                 </div>
@@ -53,7 +59,7 @@
     </div>
 
      <!-- Button trigger modal -->
-     <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -71,6 +77,15 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script type="module" src="public/assets/js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#currentWifiPassword').hide();
+            $('#showPassword').click(function(e) {
+                let dataPassword = $(this).attr('data-password');
+                $('#currentWifiPassword').html(dataPassword);
+                $('#currentWifiPassword').toggle();
+            });
+        })
+    </script>
 </body>
 </html>

@@ -5,15 +5,18 @@
      */
     namespace App\Controllers;
     use App\Models\ConnectRequestModel;
+	use App\Models\DeviceModel;
 	use Leaf\Mail\Mailer;
 	use PHPMailer\PHPMailer\PHPMailer;
 
     class ConnectRequestControlller extends Controller {
 		private $connectRequestModel;
+		private $deviceModel;
 		const DEFAULT_WIFI_PASSWORD = 'thwise101';
     	public function __construct() {
     		parent::__construct();
     		$this->connectRequestModel = new ConnectRequestModel();
+    		$this->deviceModel = new DeviceModel();
     	}
 
 		public function connectRequestPage() {
@@ -49,19 +52,22 @@
 				]);
 
 				$href = 'https://briskapi.online/api/v1/connect-request/approve?token='. $this->connectRequestModel->getRetval('token');
-				// mailer()
-				// ->create([
-				// 	'subject' => 'Leaf Mail Test',
-				// 	'body' => "This is a test mail from Leaf Mail using gmail <br/>
-				// 		<a href='{$href}'>click this link to approve connect</a>" ,
-				// 	// next couple of lines can be skipped if you
-				// 	// set defaults in the Mailer config
-				// 	'recipientEmail' => 'gonzalesmarkangeloph@gmail.com',
-				// 	'recipientName' => 'First Last',
-				// 	'senderName' => 'Leaf Mail',
-				// 	'senderEmail' => 'cx@hotplate.one',
-				// ])
-				// ->send();
+				$hrefDecline = 'https://briskapi.online/api/v1/connect-request/decline?token='. $this->connectRequestModel->getRetval('token');
+				mailer()
+				->create([
+					'subject' => 'Requesting Wifi Access Connection',
+					'body' => "A wifi connection is being requested<br/>
+						<a href='{$href}'>click this link to approve connect</a>
+						<a href='{$hrefDecline}'>Decline</a>
+					" ,
+					// next couple of lines can be skipped if you
+					// set defaults in the Mailer config
+					'recipientEmail' => 'gonzalesmarkangeloph@gmail.com',
+					'recipientName' => 'First Last',
+					'senderName' => 'W1ISEPORTAL',
+					'senderEmail' => 'cx@hotplate.one',
+				])
+				->send();
         		//send email request
         		echo parent::apiResponse([
         			'token' => $this->connectRequestModel->getRetval('token'),
@@ -107,7 +113,7 @@
 				$resp = $this->connectRequestModel->getByToken($token);
 				echo $this->apiResponse([
 					'token_data' => $resp,
-					'wifi_password' => self::DEFAULT_WIFI_PASSWORD
+					'wifi_password' => $this->deviceModel->getPassword(1)
 				]);
 			} else {
 				echo 'token not found';

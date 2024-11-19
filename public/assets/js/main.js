@@ -11,7 +11,7 @@ const request_total = document.querySelector('#request_total');
 
 // approveButton.addEventListener("click", signup)
 // declineButton.addEventListener("click", login)
-closeButton.addEventListener("click", () => modal.close())
+// closeButton.addEventListener("click", () => modal.close())
 
 // const SERVER_URL = "http://localhost/api_development/api_iot_wifi_connect";
 const SERVER_URL = "https://briskapi.online";
@@ -23,7 +23,6 @@ let challengeString = initdata['challenge'];
 let connectionRequests = getRequests();
 await signup();
 $(document).ready(function(){
-
     $('#request_connect_list_tbody').on('click button', async function(e) {
         let target = $(e.target);
         let targetToken =  target.attr('data-token');
@@ -90,7 +89,7 @@ async function signup() {
     console.log(data);
     console.log(challengeString.split(','));
 
-    showModalText(`Finger prin recognized`);
+    showModalText(`Finger print recognized`);
 }
 
 async function login() {
@@ -107,11 +106,11 @@ async function login() {
         publicKey : {
             // challenge : new Uint8Array([0,1,2,3,4,5,6]),
             challenge : new Uint8Array(challengeString.split(',')),
-            allowCredentials : [
-                {
-                    type : 'public-key', id : rawId
-                }
-            ],
+            // allowCredentials : [
+            //     {
+            //         type : 'public-key', id : rawId
+            //     }
+            // ],
             user : {
                 id: new Uint8Array(initdata['user_id']),
                 name: initdata['user_name'],
@@ -136,6 +135,8 @@ async function login() {
 }
 
 async function showModalText(text) {
+    $("#modalMessage p.modal-message").html(text);
+    $('#modalMessage').modal('show')
     modal.querySelector('[data-content]').innerText = text;
     modal.showModal();
 }
@@ -164,14 +165,14 @@ async function getRequests(request_type) {
                         <td>${data[i]['token']}</td>
                         <td>${data[i]['created_at']}</td>
                         <td>
-                            <button class="btn btn-primary btn-sm approve" data-token="${data[i]['token']}">Approve</button> &nbsp;
-                            <button class="btn btn-danger btn-sm decline" data-token="${data[i]['token']}">Decline</button>
+                            <button class="btn btn-primary btn-sm approve" data-token="${data[i]['token']}"><i class='fa fa-check'></i></button>
+                            <button class="btn btn-danger btn-sm decline" data-token="${data[i]['token']}"><i class='fa fa-times'></i></button>
                         </td>
                     <tr>
                 `;
             }
 
-            request_total.innerHTML = data.length;
+            request_total.innerHTML = `Request Total : ${data.length}`;
             request_total.style.display = 'block';
         } else {
             tbody = `

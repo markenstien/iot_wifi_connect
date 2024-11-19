@@ -25,3 +25,8 @@ app()->get('/', function () {
  });
  
 
+ app()->get('/device/update-password',"DeviceController@updatePassword");
+ app()->post('/device/update-password',"DeviceController@updatePassword");
+ app()->get('/device/get-password',"DeviceController@getPassword");
+
+

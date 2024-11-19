@@ -51,7 +51,6 @@ async function signup() {
             'webauthn - saved',
             content
         ]);
-        
     }
 
     rawId = data.rawId;
