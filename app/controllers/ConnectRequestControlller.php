@@ -17,7 +17,8 @@
     	}
 
 		public function connectRequestPage() {
-			render('connect_request/index');
+			// render('connect_request/index')
+			render('connect_request/request_login');
 		}
         /**
          *API CONNECT REQUEST
@@ -85,6 +86,18 @@
 			}
 		}
 
+		public function connectDecline() {
+			$token = request()->params('token');
+			if(!empty($token)) {
+				$response = $this->connectRequestModel->connectDecline($token);
+				if($response) {
+					echo 'request approved';
+				} else {
+					echo 'request not approved';
+				}
+			}
+		}
+
 		/**
 		 * keep alive
 		 */
@@ -99,5 +112,24 @@
 			} else {
 				echo 'token not found';
 			}
+		}
+
+		public function getRequests() {
+			$requestType = request()->params('request_type') ?? 'pending';
+			echo $this->apiResponse([
+				'pending_requests' => $this->connectRequestModel->getAll([
+					'where' => [
+						['request_status', '=', $requestType]
+					]
+				])
+			]);
+		}
+
+		public function fingerPrintChallengeApi() {
+			echo $this->apiResponse([
+				'challenge' => '0,1,2,3,4,5,6',
+				'user_id'   => '16',
+				'user_name' => 'wiseportal@gmail.com'
+			]);
 		}
     }

@@ -39,8 +39,31 @@
             }
         }
 
+        public function connectDecline($token) {
+            $exist = $this->getByToken($token);
+            if($exist && !$exist->flag_used) {
+                if($exist->flag_used) {
+                    //token already used
+                    parent::setRetval('connect-decline-error', 'Connect request is already declined');
+                    return false;
+                }
+                $exist->flag_used = true;
+                $exist->request_status = 'decline';
+                $exist->save();
+                return true;
+            } else {
+                parent::setRetval('connect-decline-error', 'Connect request token not found');
+                return false;
+            }
+        }
+
         public function getByToken($token) {
             return parent::where('token', $token)->first();
+        }
+
+        public function getAll($params = []) {
+            $defaultWhere = $params['where'] ?? [['request_status','=','pending']];
+            return parent::where($defaultWhere)->orderBy('id', 'desc')->get();
         }
 
         private function createToken($length = 5) {
@@ -50,4 +73,5 @@
             }
             return $result;
         }
+        
     }
