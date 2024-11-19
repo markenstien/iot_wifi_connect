@@ -56,8 +56,8 @@
 				mailer()
 				->create([
 					'subject' => 'Requesting Wifi Access Connection',
-					'body' => "A wifi connection is being requested<br/>
-						<a href='{$href}'>click this link to approve connect</a>
+					'body' => "A wifi connection is being requested <br/>
+						<a href='{$href}'>click this link to approve connect</a> <br/>
 						<a href='{$hrefDecline}'>Decline</a>
 					" ,
 					// next couple of lines can be skipped if you

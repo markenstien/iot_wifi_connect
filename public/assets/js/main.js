@@ -137,8 +137,6 @@ async function login() {
 async function showModalText(text) {
     $("#modalMessage p.modal-message").html(text);
     $('#modalMessage').modal('show')
-    modal.querySelector('[data-content]').innerText = text;
-    modal.showModal();
 }
 
 async function getRequests(request_type) {
