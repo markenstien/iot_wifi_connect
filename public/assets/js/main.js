@@ -1,8 +1,8 @@
 const approveButton = document.querySelector("[data-signup]")
 const declineButton = document.querySelector("[data-login]")
 // const emailInput = document.querySelector("[data-email]")
-const modal = document.querySelector("[data-modal]")
-const closeButton = document.querySelector("[data-close]")
+// const modal = document.querySelector("[data-modal]")
+// const closeButton = document.querySelector("[data-close]")
 
 const request_connect_list_tbody = document.querySelector('#request_connect_list_tbody');
 const request_total = document.querySelector('#request_total');
