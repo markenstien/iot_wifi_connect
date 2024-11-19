@@ -14,12 +14,11 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-            <!-- Navbar content -->
-        <div style="text-align: center; width:100%">
-            <h1 class="text-white">W1SEPORTAL</h1>
-        </div>
-    </nav>
+    <div style="background-color: #000">
+        <img src="public/assets/image/wise_portal.jpg" alt="" style="width: 100%;">
+    </div>
+
+    <div style="height: 30px; background-color:#160F29"></div>
     <div id="main">
         <div class="col-md-6 col-xs-8" id="baseContainer">
             <div class="container-fluid">

@@ -13,14 +13,14 @@ const request_total = document.querySelector('#request_total');
 // declineButton.addEventListener("click", login)
 // closeButton.addEventListener("click", () => modal.close())
 
-const SERVER_URL = "http://localhost/api_development/api_iot_wifi_connect";
-// const SERVER_URL = "https://briskapi.online";
+// const SERVER_URL = "http://localhost/api_development/api_iot_wifi_connect";
+const SERVER_URL = "https://briskapi.online";
 let rawId;
 
 //store challenge in database
 let initdata = await getData();
 let challengeString = initdata['challenge'];
-// await signup();
+await signup();
 let connectionRequests = getRequests();
 
 setInterval(getRequests,5000);
