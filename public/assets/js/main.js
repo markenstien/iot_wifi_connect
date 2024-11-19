@@ -23,7 +23,7 @@ let challengeString = initdata['challenge'];
 await signup();
 let connectionRequests = getRequests();
 
-setInterval(getRequests,5000);
+setInterval(getRequests,8000);
 $(document).ready(function(){
     $('#request_connect_list_tbody').on('click button', async function(e) {
         let target = $(e.target);
