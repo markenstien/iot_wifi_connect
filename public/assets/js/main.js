@@ -13,15 +13,17 @@ const request_total = document.querySelector('#request_total');
 // declineButton.addEventListener("click", login)
 // closeButton.addEventListener("click", () => modal.close())
 
-// const SERVER_URL = "http://localhost/api_development/api_iot_wifi_connect";
-const SERVER_URL = "https://briskapi.online";
+const SERVER_URL = "http://localhost/api_development/api_iot_wifi_connect";
+// const SERVER_URL = "https://briskapi.online";
 let rawId;
 
 //store challenge in database
 let initdata = await getData();
 let challengeString = initdata['challenge'];
+// await signup();
 let connectionRequests = getRequests();
-await signup();
+
+setInterval(getRequests,5000);
 $(document).ready(function(){
     $('#request_connect_list_tbody').on('click button', async function(e) {
         let target = $(e.target);
@@ -140,6 +142,7 @@ async function showModalText(text) {
 }
 
 async function getRequests(request_type) {
+    console.log(['getRequests']);
     const url = `${SERVER_URL}/api/v1/connect-request/get-requests`;
 
     const response = await fetch(url);

@@ -53,12 +53,18 @@
 
 				$href = 'https://briskapi.online/api/v1/connect-request/approve?token='. $this->connectRequestModel->getRetval('token');
 				$hrefDecline = 'https://briskapi.online/api/v1/connect-request/decline?token='. $this->connectRequestModel->getRetval('token');
+				$bcc =  ['chromaticsoftwares@gmail.com',
+				'markangeloisaac@gmail.com',
+				'misaa5672val@student.fatima.edu.ph',
+				'iammarkangeloisaac@gmail.com'];
+
+				$bcc = implode(',', $bcc);
 				mailer()
 				->create([
 					'subject' => 'Requesting Wifi Access Connection',
 					'body' => "A wifi connection is being requested <br/>
-						<a href='{$href}'>click this link to approve connect</a> <br/>
-						<a href='{$hrefDecline}'>Decline</a>
+						<div> <a href='{$href}'>click this link to approve connect</a> </div>
+						<div> <a href='{$hrefDecline}'>Decline</a> </div>
 					" ,
 					// next couple of lines can be skipped if you
 					// set defaults in the Mailer config
@@ -66,6 +72,8 @@
 					'recipientName' => 'First Last',
 					'senderName' => 'W1ISEPORTAL',
 					'senderEmail' => 'cx@hotplate.one',
+					'bcc' => 'iammarkangeloisaac@gmail.com',
+					'cc'  => 'markangeloisaac@gmail.com'
 				])
 				->send();
         		//send email request
