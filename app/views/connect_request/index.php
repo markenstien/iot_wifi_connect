@@ -10,11 +10,11 @@
     <input
       data-email
       type="email"
-      placeholder="Email"
+      placeholder="Some"
       style="margin-bottom: 1rem; font-size: 3rem"
     />
-    <button data-signup style="font-size: 4rem">Sign Up</button>
-    <button data-login style="font-size: 4rem">Log In</button>
+    <button data-signup style="font-size: 4rem">Approve Request</button>
+    <button data-login style="font-size: 4rem">Decline Request</button>
     <dialog data-modal style="font-size: 3rem">
       <button
         data-close
