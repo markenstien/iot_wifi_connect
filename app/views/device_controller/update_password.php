@@ -33,7 +33,7 @@
                     <form method="post">
                         <div style="display: flex;">
                             <div style="flex : 2; margin-right : 10px">
-                                <input type="text" class="form-control" id="new_password" name="new_password">
+                                <input type="text" class="form-control" id="new_password" name="new_password" required minlength="8">
                             </div>
                             <div style="flex : 1">
                                 <input type="submit" class="btn btn-sm btn-success" value="Update">
