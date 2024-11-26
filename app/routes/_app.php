@@ -1,8 +1,7 @@
 <?php
 
-app()->get('/', function () {
-    response()->json(['message' => 'Congrats!! You\'re on Leaf API']);
-});
+app()->get('/', 'UserController@index');
+app()->get('/user/edit/{id}', 'UserController@edit');
 
 
  app()->group('/api/v1/connect-request', function() {

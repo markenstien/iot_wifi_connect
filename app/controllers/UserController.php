@@ -1,6 +1,9 @@
 <?php 
     namespace App\Controllers;
-    use App\Models\UserModel;
+
+use App\Helpers\SessionHelper;
+use App\Models\UserModel;
+use Illuminate\Contracts\Session\Session;
 
     class UserController extends Controller {
         private $userModel;
@@ -40,6 +43,11 @@
          */
         public function index() {
 
+            if(empty(SessionHelper::get('userauth'))) {
+
+            }
+
+            render('user/index');
         }
 
         /**
@@ -47,5 +55,9 @@
          */
         public function store() {
 
+        }
+
+        public function edit($id) {
+            render('user/edit');
         }
     }
