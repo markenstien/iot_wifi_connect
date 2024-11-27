@@ -16,7 +16,7 @@
 | the root file for quickly hosting on shared hosting platforms.
 |
 */
-
+session_start();
 $uri = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
 );

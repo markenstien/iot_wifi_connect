@@ -1,3 +1,6 @@
+<?php
+    use App\Helpers\SessionHelper;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +14,22 @@
         body{
             padding: 0px;
         }
+
+        #navigation {
+            padding: 0px;
+            margin: 0px;
+            margin-bottom: 50px;
+        }
+        #navigation li {
+            list-style: none;
+            display: inline-block;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
     <div style="background-color: #000">
-        <img src="public/assets/image/wise_portal.jpg" alt="" style="width: 100%;">
+        <img src="../public/assets/image/wise_portal.jpg" alt="" style="width: 100%;">
     </div>
 
     <div style="height: 30px; background-color:#160F29"></div>
@@ -26,7 +40,11 @@
                     <h4 class="text-center">Login</h4>
                 <hr>
 
-                <form action="">
+                <form method="post">
+                    <?php
+                        if(!empty($message)) :?>
+                        <p class="text-danger"><?php echo $message?></p>
+                    <?php endif?>
                     <div class="form-group">
                         <label for="#">Email</label>
                         <input type="text" name="email" id="email" class="form-control" required>

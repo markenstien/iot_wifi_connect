@@ -1,9 +1,11 @@
 <?php 
     namespace App\Controllers;
 
-use App\Helpers\SessionHelper;
-use App\Models\UserModel;
-use Illuminate\Contracts\Session\Session;
+    use App\Helpers\SessionHelper;
+    use App\Models\UserModel;
+    use Illuminate\Contracts\Session\Session;
+    use Illuminate\Support\Facades\URL;
+    use Leaf\Config;
 
     class UserController extends Controller {
         private $userModel;
@@ -42,12 +44,30 @@ use Illuminate\Contracts\Session\Session;
          * get users
          */
         public function index() {
+            $message = '';
+            if($this->isSubmitted()) {
+                $post = request()->postData();
 
-            if(empty(SessionHelper::get('userauth'))) {
+                $user = $this->userModel->where([
+                    ['email', '=', $post['email']],
+                    ['password', '=', $post['password']]
+                ])->first();
 
+                if(!$user) {
+                    $message = 'user not found';
+                } else {
+                    //set session
+                    SessionHelper::set('userid', $user->id);
+                    return redirect('../request-page');
+                }
             }
 
-            render('user/index');
+            if(!empty(SessionHelper::get('userid'))) {
+                redirect('../user/edit/' . SessionHelper::get('userid'), ['message' => $message]);
+            } else {
+                render('user/index', ['message' => $message]);
+            }
+            
         }
 
         /**
@@ -58,6 +78,27 @@ use Illuminate\Contracts\Session\Session;
         }
 
         public function edit($id) {
-            render('user/edit');
+            if(!SessionHelper::get('userid')) {
+                return redirect('../../');
+            }
+            $message = '';
+            if($this->isSubmitted()) {
+                $post = request()->postData();
+                $user = $this->userModel->where('id', $id)->first();
+
+                $user->password = $post['password'];
+                $response = $user->save();
+
+                $message = 'password updataed';
+            }
+            render('user/edit', [
+                'message' => $message
+            ]);
+        }
+
+        public function logout() {
+            session_destroy();
+            SessionHelper::remove('userid');
+            return redirect('../user/login');
         }
     }

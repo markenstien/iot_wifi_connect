@@ -1,5 +1,6 @@
 <?php 
     namespace App\Controllers;
+    use App\Helpers\SessionHelper;
     use App\Models\DeviceModel;
 
     class DeviceController extends Controller
@@ -12,6 +13,10 @@
         }
 
         public function updatePassword() {
+            if(!SessionHelper::get('userid')) {
+                return redirect('../');
+            }
+
             $message = '';
             if(parent::isSubmitted()) {
                 $req = request()->postData();

@@ -4,7 +4,9 @@
      * to forward the request to the main cloud
      */
     namespace App\Controllers;
-    use App\Models\ConnectRequestModel;
+
+use App\Helpers\SessionHelper;
+use App\Models\ConnectRequestModel;
 	use App\Models\DeviceModel;
 	use Leaf\Mail\Mailer;
 	use PHPMailer\PHPMailer\PHPMailer;
@@ -20,7 +22,9 @@
     	}
 
 		public function connectRequestPage() {
-			// render('connect_request/index')
+			if(!SessionHelper::get('userid')) {
+                return redirect('user/login');
+            }
 			render('connect_request/request_login');
 		}
         /**

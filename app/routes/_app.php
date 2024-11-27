@@ -1,9 +1,15 @@
 <?php
 
-app()->get('/', 'UserController@index');
+app()->get('/', function() {
+   redirect('user/login');
+});
+app()->post('/', 'UserController@index');
+app()->get('/user/login', 'UserController@index');
+app()->post('/user/login', 'UserController@index');
 app()->get('/user/edit/{id}', 'UserController@edit');
+app()->post('/user/edit/{id}', 'UserController@edit');
 
-
+app()->get('/user/logout', 'UserController@logout');
  app()->group('/api/v1/connect-request', function() {
     $controller = 'ConnectRequestControlller';
     app()->get('/', "{$controller}@connectRequest");
@@ -14,7 +20,7 @@ app()->get('/user/edit/{id}', 'UserController@edit');
     app()->get('/get-requests', "{$controller}@getRequests");
  });
 
- app()->get('/request-page/', "ConnectRequestControlller@connectRequestPage");
+ app()->get('/request-page', "ConnectRequestControlller@connectRequestPage");
 
  //api
 

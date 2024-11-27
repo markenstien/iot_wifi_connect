@@ -1,3 +1,8 @@
+<?php
+    use App\Helpers\SessionHelper;
+use Illuminate\Contracts\Session\Session;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +16,22 @@
         body{
             padding: 0px;
         }
+        #navigation {
+            padding: 0px;
+            margin: 0px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        #navigation li {
+            list-style: none;
+            display: inline-block;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
     <div style="background-color: #000">
-        <img src="public/assets/image/wise_portal.jpg" alt="" style="width: 100%;">
+        <img src="../../public/assets/image/wise_portal.jpg" alt="" style="width: 100%;">
     </div>
 
     <div style="height: 30px; background-color:#160F29"></div>
@@ -23,26 +39,38 @@
         <div class="col-md-6 col-xs-8" id="baseContainer">
             <div class="container-fluid">
                 <div class="mt-3"></div>
-                    <h4 class="text-center">Login</h4>
+                    <h4 class="text-center">Change Password</h4>
                 <hr>
 
-                <form action="">
-                    <div class="form-group">
-                        <label for="#">Email</label>
-                        <input type="text" name="email" id="email" class="form-control" required>
-                    </div>
+                <form action="" method="post">
+                    <?php
+                        if(!empty($message)) :?>
+                        <p class="text-success"><?php echo $message?></p>
+                    <?php endif?>
 
+                    <input type="hidden" name="userid" value="<?php echo SessionHelper::get('userid') ?? '3'?>">
                     <div class="form-group">
-                        <label for="#">Password</label>
+                        <label for="#">New password</label>
                         <input type="password" name="password" id="password" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="login">
+                        <input type="submit" class="btn btn-primary" value="Update">
                     </div>
                 </form>
             </div>
             <div class="mt-4"></div>
+
+            <div>
+                <ul id="navigation">
+                    <li><a href="../../request-page">Requests</a></li>
+                    <li><a href="../../device/update-password">Device Password</a></li>
+                    <li><a href="../../user/edit/<?php echo SessionHelper::get('userid') ?? '3'?>">User Password</a></li>
+                    <li><a href="../../user/logout">Logout</a></li>
+                </ul>
+            </div>
+
+
             <div style="background-color: #000; padding:10px; color:#fff">
                 <div class="text-center">
                     <p>W1SEPORTAL <?php echo date('Y')?> v.1</p>
