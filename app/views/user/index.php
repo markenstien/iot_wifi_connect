@@ -32,7 +32,7 @@
         <img src="../public/assets/image/wise_portal.jpg" alt="" style="width: 100%;">
     </div>
 
-    <div style="height: 30px; background-color:#160F29"></div>
+    <div style="height: 30px; background-color:#521616"></div>
     <div id="main">
         <div class="col-md-6 col-xs-8" id="baseContainer">
             <div class="container-fluid">
@@ -61,7 +61,7 @@
                 </form>
             </div>
             <div class="mt-4"></div>
-            <div style="background-color: #000; padding:10px; color:#fff">
+            <div style="background-color: #521616; padding:10px; color:#fff">
                 <div class="text-center">
                     <p>W1SEPORTAL <?php echo date('Y')?> v.1</p>
                     <!-- <p><a href="/admin-login">Login as Admin</a></p> -->

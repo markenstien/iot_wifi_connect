@@ -36,7 +36,7 @@
         <img src="public/assets/image/wise_portal.jpg" alt="" style="width: 100%;">
     </div>
 
-    <div style="height: 30px; background-color:#160F29"></div>
+    <div style="height: 30px; background-color:#521616"></div>
     <div id="main">
         <div class="col-md-6 col-xs-8" id="baseContainer">
             <div class="container-fluid">
@@ -46,6 +46,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm">
                         <thead>
+                            <th style="width: 10%;"></th>
                             <th style="width: 20%;">Name</th>
                             <th>Date</th>
                             <th>Actions</th>
@@ -55,6 +56,8 @@
 
                         </tbody>
                     </table>
+                    <button data-type = 'approve' role="button" type="submit" class="bulk-action btn btn-sm btn-primary">Approve</button>
+                    <button data-type = 'decline' role="button" type="submit" class="bulk-action btn btn-sm btn-danger">Decline</button>
 
                     <h3 id="request_total" style="display: none;">Request Total : </h3>
                 </div>
@@ -69,7 +72,7 @@
                 </ul>
             </div>
             
-            <div style="background-color: #000; padding:10px; color:#fff">
+            <div style="background-color: #521616; padding:10px; color:#fff">
                 <div class="text-center">
                     <p>W1SEPORTAL <?php echo date('Y')?> v.1</p>
                     <!-- <p><a href="/admin-login">Login as Admin</a></p> -->

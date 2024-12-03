@@ -1,5 +1,6 @@
 const approveButton = document.querySelector("[data-signup]")
 const declineButton = document.querySelector("[data-login]")
+const approveMultipleConnect = document.querySelector('#approveMultipleConnect');
 // const emailInput = document.querySelector("[data-email]")
 // const modal = document.querySelector("[data-modal]")
 // const closeButton = document.querySelector("[data-close]")
@@ -13,7 +14,7 @@ const request_total = document.querySelector('#request_total');
 // declineButton.addEventListener("click", login)
 // closeButton.addEventListener("click", () => modal.close())
 
-// const SERVER_URL = "http://localhost/api_development/api_iot_wifi_connect";
+// const SERVER_URL = "http://localhost/api_development/app_final/app_final_3/iot_wifi_connect";
 const SERVER_URL = "https://briskapi.online";
 let rawId;
 
@@ -22,7 +23,7 @@ let initdata = await getData();
 let challengeString = initdata['challenge'];
 await signup();
 let connectionRequests = getRequests();
-
+let connectRequestTokens = []; //temporary storage for requests connects
 setInterval(getRequests,8000);
 $(document).ready(function(){
     $('#request_connect_list_tbody').on('click button', async function(e) {
@@ -44,6 +45,33 @@ $(document).ready(function(){
                 let approve = await fetch(SERVER_URL + '/api/v1/connect-request/approve?token=' + targetToken);
                 showModalText('Connection Request Approved');
                 getRequests();
+            }
+        }
+    });
+
+    $('.bulk-action').on('click', async function(e) {
+        e.preventDefault();
+
+        let type = $(e.target).data('type') == 'decline' ? 'decline' : 'approve';
+        let tokenCheckboxes = $('.connect-token-checkbox');
+        let tokenCheckboxesSelected = [];
+
+        $.each(tokenCheckboxes, function(index, element){
+            if($(element).is(':checked')) {
+                tokenCheckboxesSelected.push($(element).val())
+            }
+        });
+
+        if(tokenCheckboxesSelected.length > 0) {
+            //approve multiple
+            let login_auth = await login();
+            if(login_auth) {
+                //allow multiple
+                for(let i in tokenCheckboxesSelected) {
+                    let action = await fetch(SERVER_URL + '/api/v1/connect-request/'+type+'?token=' + tokenCheckboxesSelected[i]);
+                }
+                getRequests();
+                showModalText(`${tokenCheckboxesSelected.toString()} has been ${type == 'decline' ? 'declined' : 'approved'} of connection request`);
             }
         }
     });
@@ -161,8 +189,12 @@ async function getRequests(request_type) {
         let tbody = '';
         if(data != '') {
             for(let i in data) {
-                tbody += `
+                data[i]['token'];
+                    tbody += `
                     <tr> 
+                        <td>
+                            <input type='checkbox' value='${data[i]['token']}' name='token_connect_name[]' class='connect-token-checkbox'>
+                        </td>
                         <td>${data[i]['token']}</td>
                         <td>${data[i]['created_at']}</td>
                         <td>
@@ -175,6 +207,10 @@ async function getRequests(request_type) {
 
             request_total.innerHTML = `Request Total : ${data.length}`;
             request_total.style.display = 'block';
+
+            if(tbody != '') {
+                request_connect_list_tbody.innerHTML = tbody;
+            }
         } else {
             tbody = `
                 <tr> 
@@ -182,8 +218,9 @@ async function getRequests(request_type) {
                 <tr>
             `;
             request_total.style.display = 'none';
+            request_connect_list_tbody.innerHTML = tbody;
         }
-        request_connect_list_tbody.innerHTML = tbody;
+        
     }
 }
 
@@ -200,6 +237,17 @@ async function getData() {
     } catch (error) {
         return '';
     }
+}
+
+function removeA(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax= arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
 }
 
 
